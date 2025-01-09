@@ -16,7 +16,7 @@ void push(Stack *stack, void *data) {
 }
 
 void *pop(Stack *stack) {
-    if (stack->size == 0) {
+    if (empty(stack)) {
         return NULL;
     }
     Node *node = stack->top;
@@ -28,15 +28,15 @@ void *pop(Stack *stack) {
 }
 
 void *peek(Stack *stack) {
-    return stack->size == 0 ? NULL : stack->top->data;
+    return empty(stack) ? NULL : stack->top->data;
 }
 
 bool empty(Stack *stack) {
-    return stack->size == 0;
+    return stack == NULL || stack->size == 0;
 }
 
 void freeStack(Stack *stack) {
-    while (stack->size > 0) {
+    while (!empty(stack) > 0) {
         Node *node = stack->top;
         stack->top = node->next;
         free(node);
