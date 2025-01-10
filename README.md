@@ -20,3 +20,9 @@ This file contains the implementation of the trie data structure in C. It includ
 
 ### trie.h
 This header file contains the declarations for the trie data structure and its associated functions. It defines the trie structure and provides the function prototypes for trie operations.
+
+### list.c
+This file contains the implementation of the linked list data structure in C. It includes functions to initialize a linked list, insert elements into the list and delete elements from the list.
+
+### list.h
+This header file contains the declarations for the linked list data structure and its associated functions. It defines the linked list structure and provides the function prototypes for linked list operations.
