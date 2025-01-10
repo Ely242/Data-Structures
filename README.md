@@ -14,3 +14,9 @@ This file contains the implementation of the queue data structure in C. It inclu
 
 ### queue.h
 This header file contains the declarations for the queue data structure and its associated functions. It defines the queue structure and provides the function prototypes for queue operations.
+
+### trie.c
+This file contains the implementation of the trie data structure in C. It includes functions to initialize a trie, insert words into the trie, search for words in the trie, and delete words from the trie.
+
+### trie.h
+This header file contains the declarations for the trie data structure and its associated functions. It defines the trie structure and provides the function prototypes for trie operations.
