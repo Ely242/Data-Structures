@@ -18,16 +18,18 @@ void enqueue(Queue *queue, void *data) {
     node->next = NULL;
     if (empty(queue)) {
         queue->front = node;
-    } else {
+    } 
+    else {
         queue->rear->next = node;
     }
     queue->rear = node;
     queue->size++;
 }
 
-void* dequeue(Queue *queue) {
+int dequeue(Queue *queue) {
     if (empty(queue)) {
-        return NULL;
+        fprintf(stderr, "Error: Attempting to dequeue from empty queue\n");
+        exit(1);
     }
     Node *node = queue->front;
     void *data = node->data;
@@ -37,8 +39,12 @@ void* dequeue(Queue *queue) {
     return data;
 }
 
-void* peek(Queue *queue) {
-    return empty(queue) ? NULL : queue->front->data;
+int peek(Queue *queue) {
+    if (empty(queue)) {
+        fprintf(stderr, "Error: Attempting to peek from empty queue\n");
+        exit(1);
+    }
+    return queue->front->data;
 }
 
 void freeQueue(Queue *queue) {

@@ -15,9 +15,10 @@ void push(Stack *stack, void *data) {
     stack->size++;
 }
 
-void *pop(Stack *stack) {
+int pop(Stack *stack) {
     if (empty(stack)) {
-        return NULL;
+        fprintf(stderr, "Error: Attempting to pop from empty stack\n");
+        exit(1);
     }
     Node *node = stack->top;
     void *data = node->data;
@@ -27,8 +28,12 @@ void *pop(Stack *stack) {
     return data;
 }
 
-void *peek(Stack *stack) {
-    return empty(stack) ? NULL : stack->top->data;
+int peek(Stack *stack) {
+    if (empty(stack)) {
+        fprintf(stderr, "Error: Attempting to peek from empty stack\n");
+        exit(1);
+    }
+    return stack->top->data;
 }
 
 bool empty(Stack *stack) {

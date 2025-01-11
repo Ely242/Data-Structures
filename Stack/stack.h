@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 typedef struct Node {
-    void *data;
+    int data;
     struct Node *next;
 } Node;
 
@@ -18,8 +18,8 @@ typedef struct Stack {
 Stack* create_stack();
 bool empty(Stack *stack);
 void push(Stack *stack, void *data);
-void* pop(Stack *stack);
-void* peek(Stack *stack);
+int pop(Stack *stack);
+int peek(Stack *stack);
 void freeStack(Stack *stack);
 
 #endif // STACK_H

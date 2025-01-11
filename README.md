@@ -26,3 +26,9 @@ This file contains the implementation of the linked list data structure in C. It
 
 ### list.h
 This header file contains the declarations for the linked list data structure and its associated functions. It defines the linked list structure and provides the function prototypes for linked list operations.
+
+### deque.c
+This file contains the implementation of the deque (double-ended queue) data structure. It includes functions to initialize a deque, insert, delete, and peek from both ends of the queue, and check if the deque is empty.
+
+### deque.h
+This header file contains the declarations for the deque data structure and its associated functions. It defines the deque structure and provides the function prototypes for deque operations.

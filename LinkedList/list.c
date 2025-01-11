@@ -10,7 +10,8 @@ ListNode *create_list() {
 
 void insert(ListNode *head, int data, int position) {
     if (position < 0 || position > head->size) {
-        return;
+        fprintf(stderr, "Error: Attempting to insert at invalid index\n");
+        exit(1);
     }
     ListNode *node = (ListNode *)malloc(sizeof(ListNode));
     node->data = data;
@@ -32,7 +33,8 @@ void insert(ListNode *head, int data, int position) {
 
 void remove(ListNode *head, int position) {
     if (position < 0 || position >= head->size) {
-        return;
+        fprintf(stderr, "Error: Attempting to remove from invalid index\n");
+        exit(1);
     }
     if (position == 0) {
         ListNode *temp = head->next;
@@ -52,7 +54,7 @@ void remove(ListNode *head, int position) {
 }
 
 bool empty(ListNode *head) {
-    return head->size == 0;
+    return head == NULL || head->size == 0;
 }
 
 void free_list(ListNode *head) {
