@@ -32,3 +32,9 @@ This file contains the implementation of the deque (double-ended queue) data str
 
 ### deque.h
 This header file contains the declarations for the deque data structure and its associated functions. It defines the deque structure and provides the function prototypes for deque operations.
+
+### hash.c
+This file contains the implementation of the hash table data structure in C. It includes functions to initialize a hash table, insert key-value pairs into the table, search for values by key, and delete key-value pairs from the table.
+
+### hash.h
+This header file contains the declarations for the hash table data structure and its associated functions. It defines the hash table structure and provides the function prototypes for hash table operations.
