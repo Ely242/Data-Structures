@@ -57,6 +57,18 @@ int getOrDefault(Map* obj, int key, int defaultValue) {
     return defaultValue;
 }
 
+bool contains(Map* obj, int key) {
+    int index = hash_int(key) % HASH_SIZE;
+    HashNode* node = obj->data[index];
+    while (node != NULL) {
+        if (node->key == key) {
+            return true;
+        }
+        node = node->next;
+    }
+    return false;
+}
+
 void remove_key(Map* obj, int key) {
     int index = hash_int(key) % HASH_SIZE;
     HashNode* node = obj->data[index];

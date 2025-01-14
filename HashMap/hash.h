@@ -22,6 +22,7 @@ Map* create_map();
 void put(Map* obj, int key, int value);
 int get(Map* obj, int key);
 int getOrDefault(Map* obj, int key, int defaultValue);
+bool contains(Map* obj, int key);
 void remove_key(Map* obj, int key);
 bool contains(Map* obj, int key);
 void free_map(Map* obj);
