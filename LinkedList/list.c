@@ -1,5 +1,9 @@
 #include "list.h"
 
+/**
+ * Creates a new linked list.
+ * @return Pointer to the created ListNode structure.
+ */
 ListNode *create_list() {
     ListNode *head = (ListNode *)malloc(sizeof(ListNode));
     head->data = 0;
@@ -8,6 +12,12 @@ ListNode *create_list() {
     return head;
 }
 
+/**
+ * Inserts an item into the linked list.
+ * @param head Pointer to the head of the linked list.
+ * @param data The data to be inserted.
+ * @param position The position at which to insert the data.
+ */
 void insert(ListNode *head, int data, int position) {
     if (position < 0 || position > head->size) {
         fprintf(stderr, "Error: Attempting to insert at invalid index\n");
@@ -31,6 +41,11 @@ void insert(ListNode *head, int data, int position) {
     head->size++;
 }
 
+/**
+ * Removes an item from the linked list.
+ * @param head Pointer to the head of the linked list.
+ * @param position The position at which to remove the data.
+ */
 void remove(ListNode *head, int position) {
     if (position < 0 || position >= head->size) {
         fprintf(stderr, "Error: Attempting to remove from invalid index\n");
@@ -53,10 +68,19 @@ void remove(ListNode *head, int position) {
     head->size--;
 }
 
-bool empty(ListNode *head) {
+/**
+ * Checks if the linked list is empty.
+ * @param head Pointer to the head of the linked list.
+ * @return true if the linked list is empty, false otherwise.
+ */
+bool is_empty(ListNode *head) {
     return head == NULL || head->size == 0;
 }
 
+/**
+ * Frees the memory allocated for the linked list.
+ * @param head Pointer to the head of the linked list.
+ */
 void free_list(ListNode *head) {
     ListNode *current = head->next;
     while (current != NULL) {

@@ -17,10 +17,10 @@ typedef struct Queue {
 } Queue;
 
 Queue* create_queue();
-bool empty(Queue *queue);
-void enqueue(Queue *queue, void *data);
+bool is_empty(Queue *queue);
+void enqueue(Queue *queue, int data);
 int dequeue(Queue *queue);
 int peek(Queue *queue);
-void freeQueue(Queue *queue);
+void free_queue(Queue *queue);
 
 #endif // QUEUE_H

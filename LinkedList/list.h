@@ -12,10 +12,10 @@ typedef struct ListNode {
 } ListNode;
 
 ListNode *create_list();
-// Positions are 0-indexed
+// Position parameter should be 0-indexed
 void insert(ListNode *head, int data, int position); // add at a specific position
 void remove(ListNode *head, int position); // remove at a specific position
-bool empty(ListNode *head);
+bool is_empty(ListNode *head);
 void free_list(ListNode *head);
 
 #endif // LIST_H

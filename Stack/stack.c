@@ -1,5 +1,9 @@
 #include "stack.h"
 
+/**
+ * Creates a new stack.
+ * @return Pointer to the created Stack structure.
+ */
 Stack *create_stack() {
     Stack *stack = (Stack *)malloc(sizeof(Stack));
     stack->top = NULL;
@@ -7,7 +11,12 @@ Stack *create_stack() {
     return stack;
 }
 
-void push(Stack *stack, void *data) {
+/**
+ * Inserts an item into the stack.
+ * @param stack Pointer to the Stack structure.
+ * @param data The data to be inserted.
+ */
+void push(Stack *stack, int data) {
     Node *node = (Node*)malloc(sizeof(Node));
     node->data = data;
     node->next = stack->top;
@@ -15,6 +24,11 @@ void push(Stack *stack, void *data) {
     stack->size++;
 }
 
+/**
+ * Removes and returns the item at the top of the stack.
+ * @param stack Pointer to the Stack structure.
+ * @return The item at the top of the stack.
+ */
 int pop(Stack *stack) {
     if (empty(stack)) {
         fprintf(stderr, "Error: Attempting to pop from empty stack\n");
@@ -28,6 +42,11 @@ int pop(Stack *stack) {
     return data;
 }
 
+/**
+ * Returns the item at the top of the stack without removing it.
+ * @param stack Pointer to the Stack structure.
+ * @return The item at the top of the stack.
+ */
 int peek(Stack *stack) {
     if (empty(stack)) {
         fprintf(stderr, "Error: Attempting to peek from empty stack\n");
@@ -36,11 +55,20 @@ int peek(Stack *stack) {
     return stack->top->data;
 }
 
-bool empty(Stack *stack) {
+/**
+ * Checks if the stack is empty.
+ * @param stack Pointer to the Stack structure.
+ * @return true if the stack is empty, false otherwise.
+ */
+bool is_empty(Stack *stack) {
     return stack == NULL || stack->size == 0;
 }
 
-void freeStack(Stack *stack) {
+/**
+ * Frees the memory allocated for the stack.
+ * @param stack Pointer to the Stack structure to be freed.
+ */
+void free_stack(Stack *stack) {
     while (!empty(stack) > 0) {
         Node *node = stack->top;
         stack->top = node->next;

@@ -16,10 +16,10 @@ typedef struct Stack {
 } Stack;
 
 Stack* create_stack();
-bool empty(Stack *stack);
-void push(Stack *stack, void *data);
+bool is_empty(Stack *stack);
+void push(Stack *stack, int data);
 int pop(Stack *stack);
 int peek(Stack *stack);
-void freeStack(Stack *stack);
+void free_stack(Stack *stack);
 
 #endif // STACK_H

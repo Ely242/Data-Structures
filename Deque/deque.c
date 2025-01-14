@@ -1,5 +1,9 @@
 #include "deque.h"
 
+/**
+ * Creates a new deque.
+ * @return Pointer to the created Deque structure.
+ */
 Deque *create_deque() {
     Deque *deque = (Deque *)malloc(sizeof(Deque));
     deque->front = NULL;
@@ -8,6 +12,11 @@ Deque *create_deque() {
     return deque;
 }
 
+/**
+ * Inserts an item at the front of the deque.
+ * @param deque Pointer to the Deque structure.
+ * @param data The data to be inserted.
+ */
 void push_front(Deque *deque, int data) {
     Node *node = (Node *)malloc(sizeof(Node));
     node->data = data;
@@ -23,6 +32,11 @@ void push_front(Deque *deque, int data) {
     deque->front = node;
 }
 
+/**
+ * Inserts an item at the back of the deque.
+ * @param deque Pointer to the Deque structure.
+ * @param data The data to be inserted.
+ */
 void push_back(Deque *deque, int data) {
     Node *node = (Node *)malloc(sizeof(Node));
     node->data = data;
@@ -38,6 +52,11 @@ void push_back(Deque *deque, int data) {
     deque->back = node;
 }
 
+/**
+ * Removes and returns the item at the front of the deque.
+ * @param deque Pointer to the Deque structure.
+ * @return The item at the front of the deque.
+ */
 int pop_front(Deque *deque) {
     if (deque->front == NULL) {
         fprintf(stderr, "Error: Attempting to pop from empty deque\n");
@@ -57,6 +76,11 @@ int pop_front(Deque *deque) {
     return data;
 }
 
+/**
+ * Removes and returns the item at the back of the deque.
+ * @param deque Pointer to the Deque structure.
+ * @return The item at the back of the deque.
+ */
 int pop_back(Deque *deque) {
     if (deque->back == NULL) {
         fprintf(stderr, "Error: Attempting to pop from empty deque\n");
@@ -76,6 +100,10 @@ int pop_back(Deque *deque) {
     return data;
 }
 
+/**
+ * Frees the memory allocated for the deque.
+ * @param deque Pointer to the Deque structure to be freed.
+ */
 int peek_front(Deque *deque) {
     if (deque->front == NULL) {
         fprintf(stderr, "Error: Attempting to peek from empty deque\n");
@@ -84,6 +112,11 @@ int peek_front(Deque *deque) {
     return deque->front->data;
 }
 
+/**
+ * Returns the item at the back of the deque without removing it.
+ * @param deque Pointer to the Deque structure.
+ * @return The item at the back of the deque.
+ */
 int peek_back(Deque *deque) {
     if (deque->back == NULL) {
         fprintf(stderr, "Error: Attempting to peek from empty deque\n");
@@ -92,6 +125,11 @@ int peek_back(Deque *deque) {
     return deque->back->data;
 }
 
+/**
+ * Checks if the deque is empty.
+ * @param deque Pointer to the Deque structure.
+ * @return true if the deque is empty, false otherwise.
+ */
 bool is_empty(Deque *deque) {
     return deque->front == NULL || deque->size == 0;
 }
