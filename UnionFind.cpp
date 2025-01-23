@@ -6,6 +6,7 @@ using namespace std;
 class UnionFind {
 private:
     vector<int> parent, rank;
+    // vector<int> size;
     int components;
 public:
     UnionFind(int n) {
@@ -14,7 +15,8 @@ public:
         components = n;
         for (int i = 0; i < n; i++) {
             parent[i] = i;
-            rank[i] = 0;
+            rank[i] = 1;
+            // size[i] = 1;
         }
     }
 
@@ -40,18 +42,19 @@ public:
         int rootX = find(x);
         int rootY = find(y);
         if (rootX != rootY) {
-            if (rank[rootX] > rank[rootY]) {
+            if (rank[rootX] > rank[rootY]){
                 parent[rootY] = rootX;
-            } 
-            else if (rank[rootX] < rank[rootY]) {
+                // size[rootX] += size[rootY];
+            }
+            else if (rank[rootX] < rank[rootY]){
                 parent[rootX] = rootY;
-            } 
+                // size[rootY] += size[rootX];
+            }
             else {
                 parent[rootY] = rootX;
                 rank[rootX]++;
+                // size[rootX] += size[rootY];
             }
-            components--;
-            return true;
         }
         return false;
     }
@@ -65,6 +68,15 @@ public:
     bool connected(int x, int y) {
         return find(x) == find(y);
     }
+
+    /**
+     *  Get the size of the set in which element x belongs.
+     * @param x The element to find.
+     * @return The size of the set in which element x belongs.
+     */
+    // int getSize(int x) {
+    //     return size[find(x)];
+    // }
 
     /**
      * Get the number of connected components.
