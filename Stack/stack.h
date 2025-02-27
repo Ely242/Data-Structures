@@ -24,5 +24,6 @@ int get_size(Stack *stack);
 void* pop(Stack *stack);
 void* peek(Stack *stack);
 void free_stack(Stack *stack);
+void clear_stack(Stack *stack);
 
 #endif // STACK_H

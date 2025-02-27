@@ -100,3 +100,17 @@ void free_stack(Stack *stack) {
 int get_size(Stack *stack) {
     return stack == NULL ? 0 : stack->size;
 }
+
+/**
+ * Removes all items from the stack.
+ * @param stack Pointer to the Stack structure.
+ */
+void clear_stack(Stack *stack) {
+    while (!empty(stack) > 0) {
+        Node *node = stack->top;
+        stack->free_data(node->data);
+        stack->top = node->next;
+        free(node);
+    }
+    stack->size = 0;
+}
