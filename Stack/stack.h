@@ -4,22 +4,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
 
 typedef struct Node {
-    int data;
+    void* data;
     struct Node *next;
 } Node;
 
 typedef struct Stack {
     Node *top;
     int size;
+    void (*free_data)(void *to_free);
 } Stack;
 
-Stack* create_stack();
+Stack* create_stack(void (*free_data)(void *to_free));
 bool is_empty(Stack *stack);
-void push(Stack *stack, int data);
-int pop(Stack *stack);
-int peek(Stack *stack);
+void push(Stack *stack, void* data);
+void* pop(Stack *stack);
+void* peek(Stack *stack);
 void free_stack(Stack *stack);
 
 #endif // STACK_H

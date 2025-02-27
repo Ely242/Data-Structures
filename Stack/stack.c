@@ -2,12 +2,17 @@
 
 /**
  * Creates a new stack.
+ * @param free_data Function to free the data stored in the stack.
  * @return Pointer to the created Stack structure.
  */
-Stack *create_stack() {
+Stack *create_stack(void (*free_data)(void *to_free)) {
+    assert(free_data != NULL);
+
     Stack *stack = (Stack *)malloc(sizeof(Stack));
     stack->top = NULL;
     stack->size = 0;
+    stack->free_data = free_data;
+
     return stack;
 }
 
@@ -16,8 +21,13 @@ Stack *create_stack() {
  * @param stack Pointer to the Stack structure.
  * @param data The data to be inserted.
  */
-void push(Stack *stack, int data) {
+void push(Stack *stack, void* data) {
+    if (data == NULL){
+        return;
+    }
+
     Node *node = (Node*)malloc(sizeof(Node));
+
     node->data = data;
     node->next = stack->top;
     stack->top = node;
@@ -29,16 +39,18 @@ void push(Stack *stack, int data) {
  * @param stack Pointer to the Stack structure.
  * @return The item at the top of the stack.
  */
-int pop(Stack *stack) {
+void* pop(Stack *stack) {
     if (empty(stack)) {
-        fprintf(stderr, "Error: Attempting to pop from empty stack\n");
-        exit(1);
+        return NULL;
     }
+
     Node *node = stack->top;
     void *data = node->data;
     stack->top = node->next;
+
     free(node);
     stack->size--;
+
     return data;
 }
 
@@ -47,10 +59,9 @@ int pop(Stack *stack) {
  * @param stack Pointer to the Stack structure.
  * @return The item at the top of the stack.
  */
-int peek(Stack *stack) {
+void* peek(Stack *stack) {
     if (empty(stack)) {
-        fprintf(stderr, "Error: Attempting to peek from empty stack\n");
-        exit(1);
+        return NULL;
     }
     return stack->top->data;
 }
@@ -69,12 +80,14 @@ bool is_empty(Stack *stack) {
  * @param stack Pointer to the Stack structure to be freed.
  */
 void free_stack(Stack *stack) {
+
     while (!empty(stack) > 0) {
         Node *node = stack->top;
+        stack->free_data(node->data);
         stack->top = node->next;
         free(node);
-        stack->size--;
     }
+
     free(stack);
     stack = NULL;
 }
