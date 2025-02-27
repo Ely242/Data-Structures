@@ -5,13 +5,16 @@
  * @param free_data Function to free the data stored in the stack.
  * @return Pointer to the created Stack structure.
  */
-Stack *create_stack(void (*free_data)(void *to_free)) {
+Stack *create_stack(void (*free_data)(void *to_free), char* (*to_string)(void *data)) {
     assert(free_data != NULL);
+    assert(to_string != NULL);
 
     Stack *stack = (Stack *)malloc(sizeof(Stack));
     stack->top = NULL;
     stack->size = 0;
+
     stack->free_data = free_data;
+    stack->to_string = to_string;
 
     return stack;
 }
@@ -113,4 +116,32 @@ void clear_stack(Stack *stack) {
         free(node);
     }
     stack->size = 0;
+}
+
+/**
+ * Converts the stack to a string representation.
+ * @param stack Pointer to the Stack structure.
+ * @return The string representation of the stack.
+ */
+char* stack_to_string(Stack *stack) {
+    if (empty(stack)) {
+        return NULL;
+    }
+
+    int len = 1;
+    char *str = malloc(sizeof(char));
+    strcpy(str, "");
+
+    Node *node = stack->top;
+    while (node != NULL) {
+        char* temp = stack->to_string(node->data);
+        len += strlen(temp);
+
+        str = realloc(str, len);
+        strcat(str, temp);
+        free(temp);
+        node = node->next;
+    }
+
+    return str;
 }
