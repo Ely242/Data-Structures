@@ -105,17 +105,16 @@ void free_queue(Queue *queue) {
 char* queue_to_string(Queue *queue) {
     Node *node = queue->front;
     char *str = (char*)malloc(sizeof(char));
-    int len = 0;
+    int len = 1;
     strcpy(str, "");
 
     while (node != NULL) {
         char *data_str = queue->to_string(node->data);
-        int new_len = len + strlen(data_str);
-        str = (char*)realloc(str, new_len + 1);
+        len += strlen(data_str);
+        str = (char*)realloc(str, len * sizeof(char));
 
         strcat(str, data_str);
         node = node->next;
-        len = new_len;
         free(data_str);
     }
 
