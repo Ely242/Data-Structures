@@ -137,7 +137,7 @@ char* stack_to_string(Stack *stack) {
         char* temp = stack->to_string(node->data);
         len += strlen(temp);
 
-        str = realloc(str, len);
+        str = realloc(str, len * sizeof(char));
         strcat(str, temp);
         free(temp);
         node = node->next;
