@@ -4,11 +4,18 @@
  * Creates a new queue.
  * @return Pointer to the created Queue structure.
  */
-Queue* create_queue() {
+Queue* create_queue(void (*free_data)(void*), char* (*to_string)(void*)) {
+    assert(free_data != NULL);
+    assert(to_string != NULL);
+
     Queue *queue = (Queue*)malloc(sizeof(Queue));
+
     queue->front = NULL;
     queue->rear = NULL;
     queue->size = 0;
+
+    queue->to_string = to_string;
+    queue->free_data = free_data;
     return queue;
 }
 
@@ -26,16 +33,18 @@ bool is_empty(Queue *queue) {
  * @param queue Pointer to the Queue structure.
  * @param data The data to be inserted.
  */
-void enqueue(Queue *queue, int data) {
+void enqueue(Queue *queue, void* data) {
     Node *node = (Node*)malloc(sizeof(Node));
     node->data = data;
     node->next = NULL;
+    
     if (empty(queue)) {
         queue->front = node;
     } 
     else {
         queue->rear->next = node;
     }
+
     queue->rear = node;
     queue->size++;
 }
@@ -45,16 +54,17 @@ void enqueue(Queue *queue, int data) {
  * @param queue Pointer to the Queue structure.
  * @return The item at the front of the queue.
  */
-int dequeue(Queue *queue) {
+void* dequeue(Queue *queue) {
     if (empty(queue)) {
-        fprintf(stderr, "Error: Attempting to dequeue from empty queue\n");
-        exit(1);
+        return NULL;
     }
     Node *node = queue->front;
-    int data = node->data;
+    void* data = node->data;
     queue->front = node->next;
+
     free(node);
     queue->size--;
+
     return data;
 }
 
@@ -63,10 +73,9 @@ int dequeue(Queue *queue) {
  * @param queue Pointer to the Queue structure.
  * @return The item at the front of the queue.
  */
-int peek(Queue *queue) {
+void* peek(Queue *queue) {
     if (empty(queue)) {
-        fprintf(stderr, "Error: Attempting to peek from empty queue\n");
-        exit(1);
+        return NULL;
     }
     return queue->front->data;
 }
@@ -78,10 +87,54 @@ int peek(Queue *queue) {
 void free_queue(Queue *queue) {
     while (!empty(queue)) {
         Node *node = queue->front;
+        queue->free_data(node->data);
         queue->front = node->next;
+
         free(node);
         queue->size--;
     }
     free(queue);
     queue = NULL;
+}
+
+/**
+ * Prints the contents of the queue.
+ * @param queue Pointer to the Queue structure.
+ * @param print_data Function pointer to print the data.
+ */
+char* queue_to_string(Queue *queue) {
+    Node *node = queue->front;
+    char *str = (char*)malloc(sizeof(char));
+    int len = 0;
+    strcpy(str, "");
+
+    while (node != NULL) {
+        char *data_str = queue->to_string(node->data);
+        int new_len = len + strlen(data_str);
+        str = (char*)realloc(str, new_len + 1);
+
+        strcat(str, data_str);
+        node = node->next;
+        len = new_len;
+        free(data_str);
+    }
+
+    return str; // returned string must be freed by the caller
+}
+
+/**
+ * Clears the queue. Results in an empty queue.
+ * @param queue Pointer to the Queue structure.
+ */
+void clear_queue(Queue *queue) {
+    while (!empty(queue)) {
+        Node *node = queue->front;
+        queue->free_data(node->data);
+        queue->front = node->next;
+
+        free(node);
+    }
+    queue->front = NULL;
+    queue->rear = NULL;
+    queue->size = 0;
 }
