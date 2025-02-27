@@ -20,6 +20,7 @@ typedef struct Stack {
 Stack* create_stack(void (*free_data)(void *to_free));
 bool is_empty(Stack *stack);
 void push(Stack *stack, void* data);
+int get_size(Stack *stack);
 void* pop(Stack *stack);
 void* peek(Stack *stack);
 void free_stack(Stack *stack);

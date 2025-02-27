@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 typedef struct Node {
-    int data;
+    void* data;
     struct Node *next;
 } Node;
 
@@ -18,8 +18,8 @@ typedef struct Queue {
 
 Queue* create_queue();
 bool is_empty(Queue *queue);
-void enqueue(Queue *queue, int data);
-int dequeue(Queue *queue);
+void enqueue(Queue *queue, void* data);
+void* dequeue(Queue *queue);
 int peek(Queue *queue);
 void free_queue(Queue *queue);
 

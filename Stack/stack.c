@@ -91,3 +91,12 @@ void free_stack(Stack *stack) {
     free(stack);
     stack = NULL;
 }
+
+/**
+ * Returns the number of items in the stack.
+ * @param stack Pointer to the Stack structure.
+ * @return The number of items in the stack.
+ */
+int get_size(Stack *stack) {
+    return stack == NULL ? 0 : stack->size;
+}
