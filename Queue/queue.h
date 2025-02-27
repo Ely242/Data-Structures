@@ -21,6 +21,7 @@ typedef struct Queue {
 
 Queue* create_queue(void (*free_data)(void*), char* (*to_string)(void*));
 bool is_empty(Queue *queue);
+int get_size(Queue *queue);
 void enqueue(Queue *queue, void* data);
 void* dequeue(Queue *queue);
 void* peek(Queue *queue);

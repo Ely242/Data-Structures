@@ -138,3 +138,12 @@ void clear_queue(Queue *queue) {
     queue->rear = NULL;
     queue->size = 0;
 }
+
+/**
+ * Returns the size of the queue.
+ * @param queue Pointer to the Queue structure.
+ * @return The size of the queue.
+ */
+int get_size(Queue *queue) {
+    return queue == NULL ? 0 : queue->size;
+}
