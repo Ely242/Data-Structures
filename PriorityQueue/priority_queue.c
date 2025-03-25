@@ -76,7 +76,7 @@ bool enqueue(PriorityQueue* pq, int value){
  * @return The item at the front of the priority queue, or -1 if the queue is empty.
  */
 int dequeue(PriorityQueue* pq){
-    if (isEmpty(pq)){
+    if (is_empty(pq)){
         fprintf(stderr, "Error: Attempting to dequeue from empty priority queue\n");
         exit(1);
     }
@@ -91,7 +91,7 @@ int dequeue(PriorityQueue* pq){
  * @return The item at the front of the priority queue, or -1 if the queue is empty.
  */
 int peek(PriorityQueue* pq){
-    if (empty(pq)){
+    if (is_empty(pq)){
         fprintf(stderr, "Error: Attempting to peek from empty priority queue\n");
         exit(1);
     }

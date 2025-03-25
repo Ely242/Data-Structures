@@ -58,7 +58,7 @@ void push_back(Deque *deque, int data) {
  * @return The item at the front of the deque.
  */
 int pop_front(Deque *deque) {
-    if (deque->front == NULL) {
+    if (is_empty(deque)) {
         fprintf(stderr, "Error: Attempting to pop from empty deque\n");
         exit(1);
     }
@@ -82,7 +82,7 @@ int pop_front(Deque *deque) {
  * @return The item at the back of the deque.
  */
 int pop_back(Deque *deque) {
-    if (deque->back == NULL) {
+    if (is_empty(deque)) {
         fprintf(stderr, "Error: Attempting to pop from empty deque\n");
         exit(1);
     }
@@ -105,7 +105,7 @@ int pop_back(Deque *deque) {
  * @param deque Pointer to the Deque structure to be freed.
  */
 int peek_front(Deque *deque) {
-    if (deque->front == NULL) {
+    if (is_empty(deque)) {
         fprintf(stderr, "Error: Attempting to peek from empty deque\n");
         exit(1);
     }
