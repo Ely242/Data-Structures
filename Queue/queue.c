@@ -38,11 +38,13 @@ void enqueue(Queue *queue, void* data) {
     node->data = data;
     node->next = NULL;
     
-    if (empty(queue)) {
+    if (is_empty(queue)) {
         queue->front = node;
+        queue->rear = node;
     } 
     else {
         queue->rear->next = node;
+        queue->rear = node;
     }
 
     queue->rear = node;
@@ -55,7 +57,7 @@ void enqueue(Queue *queue, void* data) {
  * @return The item at the front of the queue.
  */
 void* dequeue(Queue *queue) {
-    if (empty(queue)) {
+    if (is_empty(queue)) {
         return NULL;
     }
     Node *node = queue->front;
@@ -74,7 +76,7 @@ void* dequeue(Queue *queue) {
  * @return The item at the front of the queue.
  */
 void* peek(Queue *queue) {
-    if (empty(queue)) {
+    if (is_empty(queue)) {
         return NULL;
     }
     return queue->front->data;
@@ -85,7 +87,7 @@ void* peek(Queue *queue) {
  * @param queue Pointer to the Queue structure to be freed.
  */
 void free_queue(Queue *queue) {
-    while (!empty(queue)) {
+    while (!is_empty(queue)) {
         Node *node = queue->front;
         queue->free_data(node->data);
         queue->front = node->next;
@@ -126,7 +128,7 @@ char* queue_to_string(Queue *queue) {
  * @param queue Pointer to the Queue structure.
  */
 void clear_queue(Queue *queue) {
-    while (!empty(queue)) {
+    while (!is_empty(queue)) {
         Node *node = queue->front;
         queue->free_data(node->data);
         queue->front = node->next;
