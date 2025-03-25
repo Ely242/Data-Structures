@@ -43,7 +43,7 @@ void push(Stack *stack, void* data) {
  * @return The item at the top of the stack.
  */
 void* pop(Stack *stack) {
-    if (empty(stack)) {
+    if (is_empty(stack)) {
         return NULL;
     }
 
@@ -63,7 +63,7 @@ void* pop(Stack *stack) {
  * @return The item at the top of the stack.
  */
 void* peek(Stack *stack) {
-    if (empty(stack)) {
+    if (is_empty(stack)) {
         return NULL;
     }
     return stack->top->data;
@@ -84,7 +84,7 @@ bool is_empty(Stack *stack) {
  */
 void free_stack(Stack *stack) {
 
-    while (!empty(stack) > 0) {
+    while (!is_empty(stack) > 0) {
         Node *node = stack->top;
         stack->free_data(node->data);
         stack->top = node->next;
@@ -109,7 +109,7 @@ int get_size(Stack *stack) {
  * @param stack Pointer to the Stack structure.
  */
 void clear_stack(Stack *stack) {
-    while (!empty(stack) > 0) {
+    while (!is_empty(stack) > 0) {
         Node *node = stack->top;
         stack->free_data(node->data);
         stack->top = node->next;
@@ -124,7 +124,7 @@ void clear_stack(Stack *stack) {
  * @return The string representation of the stack.
  */
 char* stack_to_string(Stack *stack) {
-    if (empty(stack)) {
+    if (is_empty(stack)) {
         return NULL;
     }
 
