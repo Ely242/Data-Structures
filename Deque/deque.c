@@ -18,6 +18,10 @@ Deque *create_deque() {
  * @param data The data to be inserted.
  */
 void push_front(Deque *deque, int data) {
+    if (deque == NULL) {
+        fprintf(stderr, "Error: Attempting to push to null deque\n");
+        exit(1);
+    }
     Node *node = (Node *)malloc(sizeof(Node));
     node->data = data;
     node->next = deque->front;
@@ -38,6 +42,10 @@ void push_front(Deque *deque, int data) {
  * @param data The data to be inserted.
  */
 void push_back(Deque *deque, int data) {
+    if (deque == NULL) {
+        fprintf(stderr, "Error: Attempting to push to null deque\n");
+        exit(1);
+    }
     Node *node = (Node *)malloc(sizeof(Node));
     node->data = data;
     node->next = NULL;
@@ -118,7 +126,7 @@ int peek_front(Deque *deque) {
  * @return The item at the back of the deque.
  */
 int peek_back(Deque *deque) {
-    if (deque->back == NULL) {
+    if (is_empty(deque)) {
         fprintf(stderr, "Error: Attempting to peek from empty deque\n");
         exit(1);
     }

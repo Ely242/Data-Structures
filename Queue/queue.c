@@ -10,6 +10,11 @@ Queue* create_queue(void (*free_data)(void*), char* (*to_string)(void*)) {
 
     Queue *queue = (Queue*)malloc(sizeof(Queue));
 
+    if (queue == NULL) {
+        fprintf(stderr, "Error: Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
     queue->front = NULL;
     queue->rear = NULL;
     queue->size = 0;
@@ -34,6 +39,10 @@ bool is_empty(Queue *queue) {
  * @param data The data to be inserted.
  */
 void enqueue(Queue *queue, void* data) {
+    if (queue == NULL || data == NULL) {
+        return;
+    }
+
     Node *node = (Node*)malloc(sizeof(Node));
     node->data = data;
     node->next = NULL;
@@ -105,6 +114,10 @@ void free_queue(Queue *queue) {
  * @param print_data Function pointer to print the data.
  */
 char* queue_to_string(Queue *queue) {
+    if (queue == NULL) {
+        return NULL;
+    }
+
     Node *node = queue->front;
     char *str = (char*)malloc(sizeof(char));
     int len = 1;

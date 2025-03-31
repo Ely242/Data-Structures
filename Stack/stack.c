@@ -84,7 +84,7 @@ bool is_empty(Stack *stack) {
  */
 void free_stack(Stack *stack) {
 
-    while (!is_empty(stack) > 0) {
+    while (!is_empty(stack)) {
         Node *node = stack->top;
         stack->free_data(node->data);
         stack->top = node->next;

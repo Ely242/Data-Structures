@@ -23,6 +23,10 @@ void insert(ListNode *head, int data, int position) {
         fprintf(stderr, "Error: Attempting to insert at invalid index\n");
         exit(1);
     }
+    else if (head == NULL){
+        fprintf(stderr, "Error: Attempting to insert into null list\n");
+        exit(1);
+    }
     ListNode *node = (ListNode *)malloc(sizeof(ListNode));
     node->data = data;
     node->next = NULL;
@@ -49,6 +53,10 @@ void insert(ListNode *head, int data, int position) {
 void remove(ListNode *head, int position) {
     if (position < 0 || position >= head->size) {
         fprintf(stderr, "Error: Attempting to remove from invalid index\n");
+        exit(1);
+    }
+    else if (head == NULL){
+        fprintf(stderr, "Error: Attempting to remove from null list\n");
         exit(1);
     }
     if (position == 0) {
@@ -82,6 +90,9 @@ bool is_empty(ListNode *head) {
  * @param head Pointer to the head of the linked list.
  */
 void free_list(ListNode *head) {
+    if (head == NULL) {
+        return;
+    }
     ListNode *current = head->next;
     while (current != NULL) {
         ListNode *temp = current;
